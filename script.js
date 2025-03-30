@@ -79,31 +79,35 @@ function displayCard() {
         let pokemon = await fetchPokemonInfo(data.url)
         // console.log(pokemon);
 
-        const card = document.createElement('div');
-        card.className = 'pokemonCard';
+        let typeFilter = document.getElementById('pokemonType').value;
+        if ((typeFilter === "All" || data.types.indexOf(typeFilter) !== -1)) {
 
-        const image = document.createElement('img');
-        image.src = pokemon.image;
-        image.alt = pokemon.name;
-        card.appendChild(image);
+            const card = document.createElement('div');
+            card.className = 'pokemonCard';
 
-        const name = document.createElement('h2');
-        name.innerText = pokemon.name;
-        card.appendChild(name);
+            const image = document.createElement('img');
+            image.src = pokemon.image;
+            image.alt = pokemon.name;
+            card.appendChild(image);
 
-        const types = document.createElement('p');
-        types.innerText = "Types: " + pokemon.types.join();
-        card.appendChild(types);
+            const name = document.createElement('h2');
+            name.innerText = pokemon.name;
+            card.appendChild(name);
 
-        const base_experience = document.createElement('p');
-        base_experience.innerText = "Base experience: " + pokemon.base_experience;
-        card.appendChild(base_experience);
+            const types = document.createElement('p');
+            types.innerText = "Types: " + pokemon.types.join();
+            card.appendChild(types);
 
-        const id = document.createElement('p');
-        id.innerText = "Pokémon id: " + pokemon.id;
-        card.appendChild(id);
+            const base_experience = document.createElement('p');
+            base_experience.innerText = "Base experience: " + pokemon.base_experience;
+            card.appendChild(base_experience);
 
-        container.appendChild(card);
+            const id = document.createElement('p');
+            id.innerText = "Pokémon id: " + pokemon.id;
+            card.appendChild(id);
+
+            container.appendChild(card);
+        }
     })
 }
 
@@ -133,3 +137,8 @@ function getDataInOptions() {
 
         }).catch(error => console.log(error))
 }
+
+
+document.getElementById('SearchBar').addEventListener('change', () => {
+
+})

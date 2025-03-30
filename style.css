@@ -36,7 +36,8 @@ nav {
 }
 
 button,
-select {
+select,
+input {
     background-color: lightcoral;
     border: none;
     padding: 10px;
@@ -44,6 +45,10 @@ select {
     border-radius: 10px;
     font-weight: bold;
 
+}
+
+input {
+    background-color: ghostwhite;
 }
 
 #displayPokemon {
