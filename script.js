@@ -80,7 +80,7 @@ function displayCard() {
         // console.log(pokemon);
 
         let typeFilter = document.getElementById('pokemonType').value;
-        console.log(typeFilter);
+        // console.log(typeFilter);
         if ((typeFilter === "All" || pokemon.types.indexOf(typeFilter) !== -1)) {
 
             const card = document.createElement('div');
@@ -140,10 +140,22 @@ function getDataInOptions() {
 }
 
 
+function search() {
+    let value = document.getElementById('SearchBar').value;
+    if (value === "") return true;
+}
+
+
 document.getElementById('pokemonType').addEventListener('change', () => {
     displayCard();
 })
 
-// document.getElementById('SearchBar').addEventListener('change', () => {
+let limit;
+document.getElementById('SearchBar').addEventListener('change', () => {
+    clearTimeout(limit);
 
-// })
+    limit = setTimeout(() => {
+        displayCard();
+    }, 500);
+    
+})
