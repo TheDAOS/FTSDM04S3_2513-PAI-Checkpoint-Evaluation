@@ -80,7 +80,8 @@ function displayCard() {
         // console.log(pokemon);
 
         let typeFilter = document.getElementById('pokemonType').value;
-        if ((typeFilter === "All" || data.types.indexOf(typeFilter) !== -1)) {
+        console.log(typeFilter);
+        if ((typeFilter === "All" || pokemon.types.indexOf(typeFilter) !== -1)) {
 
             const card = document.createElement('div');
             card.className = 'pokemonCard';
@@ -139,6 +140,10 @@ function getDataInOptions() {
 }
 
 
-document.getElementById('SearchBar').addEventListener('change', () => {
-
+document.getElementById('pokemonType').addEventListener('change', () => {
+    displayCard();
 })
+
+// document.getElementById('SearchBar').addEventListener('change', () => {
+
+// })
