@@ -81,7 +81,7 @@ function displayCard() {
 
         let typeFilter = document.getElementById('pokemonType').value;
         // console.log(typeFilter);
-        if ((typeFilter === "All" || pokemon.types.indexOf(typeFilter) !== -1)) {
+        if ((typeFilter === "All" || pokemon.types.indexOf(typeFilter) !== -1) || search(pokemon.name, pokemon.types, pokemon.id)) {
 
             const card = document.createElement('div');
             card.className = 'pokemonCard';
@@ -140,9 +140,13 @@ function getDataInOptions() {
 }
 
 
-function search() {
+function search(name, type, id) {
     let value = document.getElementById('SearchBar').value;
     if (value === "") return true;
+
+    if (name.includes(value) || id.includes(value)) return true
+
+    return false;
 }
 
 
