@@ -9,11 +9,12 @@ let pageControl = {
     nextPage() {
         this.pageNo++;
         this.prevPageStack.push(baseURL);
-        console.log(this.prevPageStack.length);
+        // console.log(this.prevPageStack);
         // console.log(this.pageNo);
     },
     previousPage() {
         this.pageNo--;
+        this.prevPageStack.pop();
     }
 }
 
