@@ -1,36 +1,43 @@
 
 let baseURL = 'https://pokeapi.co/api/v2/pokemon';
-let pokemonDataList =  [];
+let pokemonDataList = [];
 // let pokemonCardDataList = [];
 
 let pageControl = {
-    prevPageStack: [],
+    nextURL: '',
+    prevURL: '',
     pageNo: 0,
     nextPage() {
         this.pageNo++;
-        this.prevPageStack.push(baseURL);
+        loadPage(this.nextURL);
+        document.getElementById('pageNo').innerText = this.pageNo + 1;
         // console.log(this.prevPageStack);
         // console.log(this.pageNo);
     },
     previousPage() {
-        this.pageNo--;
-        this.prevPageStack.pop();
+        if (this.pageNo > 0) {
+            this.pageNo--;
+            document.getElementById('pageNo').innerText = this.pageNo + 1;
+            loadPage(this.prevURL);
+        }
     }
 }
 
 
-async function loadPage() {
-    await fetchPokemonData();
+async function loadPage(url) {
+    await fetchPokemonData(url);
     // await fetchPokemonCardData();
     displayCard();
     // console.log(pokemonData);
 }
 
-async function fetchPokemonData() {
+async function fetchPokemonData(url) {
     try {
-        const response = await fetch(baseURL);
+        const response = await fetch(url);
         const data = await response.json();
 
+        pageControl.nextURL = data.next;
+        pageControl.prevURL = data.previous;
         pokemonDataList = data.results;
     } catch (error) {
         console.log(error);
@@ -38,10 +45,10 @@ async function fetchPokemonData() {
 }
 
 async function fetchPokemonCardData() {
-    pokemonDataList.forEach(async (pokemon) => { 
+    pokemonDataList.forEach(async (pokemon) => {
         let data = await fetchPokemonInfo(pokemon.url)
         console.log(data);
-        
+
         // pokemonCardDataList.push("sad");
     })
 }
@@ -104,5 +111,5 @@ function displayCard() {
 }
 
 window.onload = () => {
-    loadPage();
+    loadPage(baseURL);
 };

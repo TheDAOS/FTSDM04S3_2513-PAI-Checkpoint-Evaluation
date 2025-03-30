@@ -13,9 +13,16 @@
         <nav>
             <span>Pokémon Explorer Dashboard</span>
 
+            <div>
+                <select name="type" id="pokemonType">
+                    <option value="All">All</option>
+                </select>
+            </div>
+
             <div class="pageControl">
-                <button type="button" onclick="pageControl.nextPage()">Next</button>
                 <button type="button" onclick="pageControl.previousPage()">Previous</button>
+                <p id="pageNo">1</p>
+                <button type="button" onclick="pageControl.nextPage()">Next</button>
             </div>
         </nav>
     </header>
