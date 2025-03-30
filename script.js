@@ -1,4 +1,3 @@
-
 let baseURL = 'https://pokeapi.co/api/v2/pokemon';
 let pokemonDataList = [];
 // let pokemonCardDataList = [];
@@ -22,7 +21,6 @@ let pageControl = {
         }
     }
 }
-
 
 async function loadPage(url) {
     await fetchPokemonData(url);
@@ -52,7 +50,6 @@ async function fetchPokemonCardData() {
         // pokemonCardDataList.push("sad");
     })
 }
-
 
 async function fetchPokemonInfo(url) {
     try {
@@ -112,4 +109,27 @@ function displayCard() {
 
 window.onload = () => {
     loadPage(baseURL);
+    getDataInOptions();
 };
+
+
+
+
+// filter
+function getDataInOptions() {
+    fetch('https://pokeapi.co/api/v2/type?limit=21')
+        .then(response => response.json())
+        .then(data => {
+            let option = document.getElementById('pokemonType');
+            console.log(data);
+
+            data.results.forEach(type => {
+                let select = document.createElement('option')
+                select.value = type.name;
+                select.innerText = type.name;
+
+                option.appendChild(select);
+            })
+
+        }).catch(error => console.log(error))
+}
