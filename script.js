@@ -144,7 +144,7 @@ function search(name, type, id) {
     let value = document.getElementById('SearchBar').value;
     if (value === "") return true;
 
-    if (name.includes(value) || id.includes(value*1) || type.reduce((a, t) => {
+    if (name.includes(value) || id == value || type.reduce((a, t) => {
         if (t.includes(value)) return true;
         
         return a;
