@@ -1,11 +1,26 @@
 
 let baseURL = 'https://pokeapi.co/api/v2/pokemon';
 let pokemonDataList =  [];
-let pokemonCardDataList = [];
+// let pokemonCardDataList = [];
+
+let pageControl = {
+    prevPageStack: [],
+    pageNo: 0,
+    nextPage() {
+        this.pageNo++;
+        this.prevPageStack.push(baseURL);
+        console.log(this.prevPageStack.length);
+        // console.log(this.pageNo);
+    },
+    previousPage() {
+        this.pageNo--;
+    }
+}
+
 
 async function loadPage() {
     await fetchPokemonData();
-    await fetchPokemonCardData();
+    // await fetchPokemonCardData();
     displayCard();
     // console.log(pokemonData);
 }
@@ -57,7 +72,7 @@ function displayCard() {
     pokemonDataList.forEach(async (data) => {
         // console.log(pokemon);
         let pokemon = await fetchPokemonInfo(data.url)
-        console.log(pokemon);
+        // console.log(pokemon);
 
         const card = document.createElement('div');
         card.className = 'pokemonCard';
