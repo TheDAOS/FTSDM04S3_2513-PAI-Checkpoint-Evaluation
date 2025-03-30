@@ -81,7 +81,7 @@ function displayCard() {
 
         let typeFilter = document.getElementById('pokemonType').value;
         // console.log(typeFilter);
-        if ((typeFilter === "All" || pokemon.types.indexOf(typeFilter) !== -1) || search(pokemon.name, pokemon.types, pokemon.id)) {
+        if ((typeFilter === "All" || pokemon.types.indexOf(typeFilter) !== -1) && search(pokemon.name, pokemon.types, pokemon.id)) {
 
             const card = document.createElement('div');
             card.className = 'pokemonCard';
@@ -126,7 +126,7 @@ function getDataInOptions() {
         .then(response => response.json())
         .then(data => {
             let option = document.getElementById('pokemonType');
-            console.log(data);
+            // console.log(data);
 
             data.results.forEach(type => {
                 let select = document.createElement('option')
@@ -144,7 +144,7 @@ function search(name, type, id) {
     let value = document.getElementById('SearchBar').value;
     if (value === "") return true;
 
-    if (name.includes(value) || id.includes(value)) return true
+    if (name.includes(value) || id.includes(value*1)) return true
 
     return false;
 }
@@ -155,11 +155,11 @@ document.getElementById('pokemonType').addEventListener('change', () => {
 })
 
 let limit;
-document.getElementById('SearchBar').addEventListener('change', () => {
+document.getElementById('SearchBar').addEventListener('keyup', () => {
     clearTimeout(limit);
 
     limit = setTimeout(() => {
         displayCard();
     }, 500);
-    
+    // displayCard();
 })
